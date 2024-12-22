@@ -62,18 +62,19 @@
 var s=[ "kick-bass", "snare", "tom-1", "tom-2", "tom-3", "tom-4",  "crash" ];
 function HandleClick()
 {
-    var button=this.innerHTML; //this gives the element which triggers the eventlistener...in this case the button
-    key_sound(button);
+    var keyy=this.innerHTML; //this gives the element which triggers the eventlistener...in this case the button
+    key_sound(keyy);
+    animate(keyy);
 }
 
 var arr=document.querySelectorAll(".drum");
 for( var i=0; i<arr.length;i++)
     arr[i].addEventListener("click", HandleClick);
 
-function key_sound(button)
+function key_sound(keyy)
 {
     var i;
-    switch (button) {
+    switch (keyy) {
         case "w": i=0;
             break;
         case "a": i=1;
@@ -97,8 +98,15 @@ function key_sound(button)
 }
 document.addEventListener("keypress", HandleKey);//keypress works fineee
 
+function animate(keyy)
+{
+    var element=document.querySelector("."+keyy);
+    element.classList.add("pressed");
+    setTimeout( function (){element.classList.remove("pressed");},100);
+}
 function HandleKey(event)
 {
-    var button=event.key;
-    key_sound(button);
+    var keyy=event.key;
+    key_sound(keyy);
+    animate(keyy);
 }
